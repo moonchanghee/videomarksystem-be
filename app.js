@@ -2,17 +2,22 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const mongoose = require("mongoose")
 // var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+let cors = require('cors')
 var app = express();
+let video = require('./routes/videos/videoAPI')
+let markers = require('./routes/marker/markersApi')
 
+mongoose.connect("mongodb+srv://ckdgml228:moon2852@cluster0.miy0e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+{useNewUrlParser:true, useUnifiedTopology:true,useCreateIndex:true,useFindAndModify:false}).then(() => console.log("mongoDB 연결 성공"))
+.catch(err => console.log(err))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.use(cors());
 // app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -21,6 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/uploadVideo' , video)
+app.use('/marker' , markers)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

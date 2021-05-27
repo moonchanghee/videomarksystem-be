@@ -16,7 +16,7 @@ let Marker = new Schema({
     val : {
         type:String
     },
-    // key:{ type:String},
+    src:{ type:String},
 
 
 }, {timestamps: true})

@@ -11,7 +11,7 @@ router.post('/', function(req, res, next) {
             time: req.body.time,
             text:req.body.text,
             val:req.body.val ,
-            key : req.body.key
+            // key : req.body.key
         })
     
         marker.save((err, mark) => {
@@ -31,6 +31,20 @@ router.get('/', function(req, res, next) {
         console.log(markers)
         res.status(200).json({success:true, markers})
     })
+});
+
+
+router.delete('/:id', function(req, res, next) {
+    console.log("dddddddddddddddddddddddddd")
+    console.log("delete" , req.params.id)
+    // Markers.find().exec((err,markers) => {
+    //     if(err) return res.status(400).send(err)
+    //     console.log(markers)
+    //     res.status(200).json({success:true, markers})
+    // })
+
+    Markers.deleteOne({"time" :req.params.id }).then(e => console.log(e))
+
 });
 
 

@@ -18,6 +18,8 @@ let Marker = new Schema({
     },
     src:{ type:String},
 
+    du : {type:Number}
+
 
 }, {timestamps: true})
 

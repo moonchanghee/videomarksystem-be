@@ -11,7 +11,8 @@ router.post('/', function(req, res, next) {
             time: req.body.time,
             text:req.body.text,
             val:req.body.val ,
-            src : req.body.src 
+            src : req.body.src ,
+            du : req.body.duration
         })
     
         marker.save((err, mark) => {
